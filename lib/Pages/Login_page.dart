@@ -73,37 +73,39 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 15),
             ElevatedButton(
-              onPressed: () async {
-                if (_formkey.currentState!.validate()) {
-                  bool autorizado = await _loginRepository.login();
-                  if (autorizado) {
-                    // ignore: use_build_context_synchronously
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
-                  } else {
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.redAccent,
-                        content: Text(
-                          'Login ou senha inválidos',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                onPressed: () async {
+                  if (_formkey.currentState!.validate()) {
+                    bool autorizado = await _loginRepository.login();
+                    if (autorizado) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
                         ),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
+                      );
+                    } else {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.redAccent,
+                          content: Text(
+                            'Login ou senha inválidos',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
                   }
-                }
-              },
-              child: Text('Login'),
-            )
+                },
+                child: Text(
+                  'Login',
+                  style: TextStyle(letterSpacing: 1),
+                )),
           ],
         ),
       ),
